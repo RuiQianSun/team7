@@ -17,7 +17,8 @@ This repository focuses on solving a classification problem -  **A Stroke Predic
  To identify key features that influence stroke risk and develop an accurate predictive model for better healthcare outcomes
 
 ## Techniques
-Before preceedings to the model preparations
+Before preceedings to the training the model, we understand the data and perform the preprocessing. During the pre-processing, we update the missing numeric values with its mean, categorize the non-numeric values, and standardize the numeric ones.
+
 
 ### Models
 
