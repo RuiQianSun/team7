@@ -2,13 +2,13 @@
 
 ## Content
 
-    * [Overview] (#purpose)
-    * [Goals] (#goals)
-    * [Techniques] (#techniques)
-        + [Models] (#models)
-    * [Key Findings] (#findings)
-    * [Visuals] (#visuals)
-    * [Contacts] (#contacts)
+* [Overview] (#purpose)
+* [Goals] (#goals)
+* [Techniques] (#techniques)
+    + [Models] (#models)
+* [Key Findings] (#findings)
+* [Visuals] (#visuals)
+* [Contacts] (#contacts)
 
 ## Overview 
 
@@ -24,8 +24,8 @@
 
 ## Contacts
 
-    * Rui Qian Sun
-    * Catherine Liang
-    * Mahbub Khandoker
-    * Neethila Poddar
-    * Devangi Vyas
+* Rui Qian Sun
+* Catherine Liang
+* Mahbub Khandoker
+* Neethila Poddar
+* Devangi Vyas
