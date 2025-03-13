@@ -2,13 +2,13 @@
 
 ## Content
 
-* [Overview] (#purpose)
-* [Goals] (#goals)
-* [Techniques] (#techniques)
-    + [Models] (#models)
-* [Key Findings] (#findings)
-* [Visuals] (#visuals)
-* [Contacts] (#contacts)
+* [Overview](#overview)
+* [Goals](#goals)
+* [Techniques](#techniques)
+    + [Models](#models)
+* [Key Findings](#findings)
+* [Visuals](#visuals)
+* [Contacts](#contacts)
 
 ## Overview 
 
