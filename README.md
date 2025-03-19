@@ -36,18 +36,6 @@ The ability to predict a stroke before it happens leads to more opportunities to
 
 Identifying which factors predict stroke aides healthcare professional with developing treatments and intervetions for strokes.
 
-Risks & Unknowns
-
-Risk: It may not be possible to predict strokes
-
-Risk: It may not be possible to prevent a stroke even if you can predict it
-
-Unknown: The cost of a potential stroke prevention treatment
-
-Unknown: The reliability of the raw data
-
-Unknown: The chronological order of the data (hypertension -> stroke vs stroke -> hypertension)
-
 ## Goals & Objectivs
 The project aims to develop an reliable model to predict strokes and identify key features that predict strokes.
 
@@ -61,48 +49,63 @@ Change: Due to class imbalance we were unable to achieve a high F1 score, so we 
 Recall >= 90%
 
 ## Techniques & Technologies
-### Preprocessing Tools
+
+For preprocessing we used:
 - Imputation
 - Standard Scaling
 - Outliers (gender = other, work = child)
 - One-Hot-Encoding
 
-### Models & Methods
-- train test split
+For models we used
 - logistic regression (grid seach class_weights)
 - decision tress (grid seach class_weights)
 - xgboost (grid search scale pos weight)
+  - class weight vs scale pos weight?
 
+For techniques we used
+- train test split
+- grid__search for hyperparameter tuning
+
+Metrics
 - accuracy, precision, recall, F1
-- F1 vs Recall
+- cross validation
 - ROC AUC
-- class weight vs scale pos weight
 - feature importance
 - SHAP
-- grid__search for hyperparameter tuning
-- cross validation
-- EDA, plots, descriptive statistics
 
 ## Key Findings & Instructions
-No setup instructions
+No setup instructions are required
 
-EDA
-
-F1 -> early attempts
+F1 attempts, accuracy, precision, recall, and f1 for stroke 1 and 0 results
 -> subsetting the data
 
 Rationale for the usefulness of high recall, the holistic cost of treatment (false positives) is significantly less than the holistic cost of (false negatives). The overall cost of treatments is feasible.
 
-Recall (final model) -> comparison across models, hyperparameters
--> metrics, ROC AUC, cross validation
--> real world implications
--> SHAP, feature importance
-
 compare the metrics of each model F1 vs Recall, in a table, create an excel
+Metrics (f1 vs recall side be side)
+- accuracy, precision, recall, F1
+- cross validation
+- ROC AUC
+- feature importance
+- SHAP
 
 key factors, for each variable in our model do we agree or disagree with the SHAP and feature importance, use reasoning and EDA, what is our final answer to "which variable predict strokes"?
 
-Limitations (move from intro?)
+Age
+
+Risks, Unknowns, & Limitations
+
+Limitation: It may not be possible to predict strokes
+
+Limitation: It may not be possible to prevent a stroke even if you can predict it
+
+Unknown: The financial cost of a potential stroke prevention treatment
+
+Unknown: The reliability of the raw data
+
+Unknown: The chronological order of the data (hypertension -> stroke vs stroke -> hypertension)
+
+Risk: Stroke prevention treatment could come with negative side effects or could be dangerous and invasive
 
 ## Visuals
 EDA visuals, upload PNG files to repo
