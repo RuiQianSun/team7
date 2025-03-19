@@ -23,10 +23,10 @@ This project focuses on determing which variables significantly predict the occu
 * Smoking Status: whether the individual smokes and to what extent
 
 Business Problem:
-We are a data science team working with Health Canada on stroke prevention. Our job is to recommend "which areas stroke preventation treatment should address" and "who should receive stroke prevention treatment". 
+We are a data science team working on stroke prevention. Our job is to advise on "which factors significantly predict the occurence of stroke" and "who should receive stroke prevention treatment". 
 
 Industry Context:
-The World Health Organization states that stroke is the second leading cause of death worldwide, responsible for ~11% of all deaths. Being able to identify predictors of stroke plays a critical role in stroke prevention for the healthcare industry.
+In 2021 stroke was one of the top 5 leading causes of death in Canada, responsible for 37 deaths per 100,000 people. Being able to identify predictors of stroke plays a critical role in stroke prevention for the healthcare industry.
 
 1. Early Detection
 
@@ -37,36 +37,26 @@ The ability to predict a stroke before it happens leads to more opportunities to
 Identifying which factors predict stroke aides healthcare professional with developing treatments and intervetions for strokes.
 
 ## Goals & Objectivs
-The project aims to develop an reliable model to predict strokes and identify key features that predict strokes.
+The project aims to develop an reliable model to predict strokes and identify key features that predict strokes. Our goal is to create a model with high accuracy, precision, recall, and F1 scores.
 
-Accuracy >= 80%
-Precision >= 70%
-Recall >= 70%
-F1 >= 70%
-
-Change: Due to class imbalance we were unable to achieve a high F1 score, so we are pivoting to optimize for recall instead of F1.
-
-Recall >= 90%
+Change: Due to class imbalance we were unable to achieve a high F1 score, so we are pivoting our model to optimize for recall instead of F1. The value of a high recall model depends on the assumption that false positives (predicting a stroke for a non-stroke patient) are less harmful than false negatives (predicting no stroke for a patient that suffers a stroke).
 
 ## Techniques & Technologies
 
-For preprocessing we used:
+Preprocessing
 - Imputation
 - Standard Scaling
 - Outliers (gender = other, work = child)
 - One-Hot-Encoding
 
-For models we used
+Models
 - logistic regression (grid seach class_weights)
 - decision tress (grid seach class_weights)
-- xgboost (grid search scale pos weight)
-  - class weight vs scale pos weight?
+- xgboost (class weight vs scale pos weight)?
 
-For techniques we used
+Techniques & Metrics
 - train test split
-- grid__search for hyperparameter tuning
-
-Metrics
+- grid_search for hyperparameter tuning
 - accuracy, precision, recall, F1
 - cross validation
 - ROC AUC
@@ -79,8 +69,6 @@ No setup instructions are required
 F1 attempts, accuracy, precision, recall, and f1 for stroke 1 and 0 results
 -> subsetting the data
 
-Rationale for the usefulness of high recall, the holistic cost of treatment (false positives) is significantly less than the holistic cost of (false negatives). The overall cost of treatments is feasible.
-
 compare the metrics of each model F1 vs Recall, in a table, create an excel
 Metrics (f1 vs recall side be side)
 - accuracy, precision, recall, F1
@@ -88,10 +76,10 @@ Metrics (f1 vs recall side be side)
 - ROC AUC
 - feature importance
 - SHAP
+- explanation in real world terms
 
 key factors, for each variable in our model do we agree or disagree with the SHAP and feature importance, use reasoning and EDA, what is our final answer to "which variable predict strokes"?
-
-Age
+- Age
 
 Risks, Unknowns, & Limitations
 
