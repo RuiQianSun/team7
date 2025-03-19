@@ -43,6 +43,8 @@ Change: Due to class imbalance we were unable to achieve a high F1 score, so we 
 
 ## Techniques & Technologies
 
+reproducability -> libraries, verisions, programming language, tools, softwares
+
 Preprocessing
 - Imputation
 - Standard Scaling
