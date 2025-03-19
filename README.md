@@ -2,59 +2,112 @@
 
 ## Content
 
-* [Overview](#overview)
-* [Goals](#goals)
-* [Techniques](#techniques)
-    + [Models](#models)
-* [Key Findings](#findings)
-* [Visuals](#visuals)
-* [Contacts](#contacts)
+* [Purpose & Overview](#purpose--overview)
+* [Goals & Objectives](#goals--objectives)
+* [Techniques & Technologies](#techniques--technologies)
+* [Key Findings & Instructions](#keyfindings--instructions)
+* [Visuals & Credits](#visuals--contacts)
 
-## Overview 
-This repository focuses on solving a classification problem -  **A Stroke Prediction**. According to the World Health Organization (WHO), stroke is the second leading cause of death worldwide. In this project, we train multiple machine learning models on a relevant dataset to predict the likelihood of stroke. The goal is to identify key features that influence stroke risk and develop an accurate predictive model for better healthcare outcomes.
+## Purpose & Overview
+This project focuses on determing which variables significantly predict the occurence of stroke. Our dataset consists of 11 variables for 5,110 patients, including the variable "stroke" which is 1 if a patient had a stroke or 0 if a patient has not had a stroke. The remaining variables represent a patient's demographic, health, and lifestyle information.
 
-The Kaggle stroke dataset consists of a collection of data from 5110 individuals. Each record represents an individual’s demographic, health, and lifestyle information, along with whether they had a stroke or not. Key variables in the dataset include:
+* Age: age of patient
+* Gender: gender of patient
+* Hypertension: whether the patient has a hypertension
+* Heart Disease: whether the patient has heart disease
+* Ever Married: whether the patient is married
+* Work Type: The type of employment the patient has
+* Residence Type: The type of area where the patient resides
+* Average Glucose Level: The patient's glucose level
+* BMI: the body mass index of the patient
+* Smoking Status: whether the individual smokes and to what extent
 
-* Age: The age of the individual.
-* Gender: The gender of the individual.
-* Hypertension: Whether the individual has a history of hypertension.
-* Heart Disease: Whether the individual has a history of heart disease.
-* Ever Married: Whether the individual is married or not.
-* Work Type: The type of employment the individual has (e.g., private, self-employed, government, etc.).
-* Residence Type: The type of area where the individual resides (urban or rural).
-* Average Glucose Level: The individual’s glucose level (indicating potential metabolic issues).
+Business Problem:
+We are a data science team working with Health Canada on stroke prevention. Our job is to recommend "which areas stroke preventation treatment should address" and "who should receive stroke prevention treatment". 
 
-* BMI: The body mass index, a key indicator of weight-related health risks.
-* Smoking Status: Whether the individual smokes and the extent of their smoking habits.
+Industry Context:
+The World Health Organization states that stroke is the second leading cause of death worldwide, responsible for ~11% of all deaths. Being able to identify predictors of stroke plays a critical role in stroke prevention for the healthcare industry.
 
-### Industry Context and Relevance of Stroke Data
+1. Early Detection
 
-The healthcare and medical industry plays a critical role in addressing stroke prevention, treatment, and rehabilitation.  Understanding stroke risk factors through this dataset can help us in several ways:
-
-1. Early Diagnosis and Risk Prediction: 
-      Stroke prediction models can help healthcare providers assess an individual’s risk level before a stroke occurs. Machine learning and predictive analytics can predict the likelihood of a stroke based on personal health data, such as age, BMI, blood pressure, and lifestyle factors.Early diagnosis and intervention can significantly reduce the mortality rate and long-term disability caused by strokes.
+The ability to predict a stroke before it happens leads to more opportunities to prevent the stroke through lifestyle changes and prevention treatments.
       
-2. Improved Healthcare Services:
-Identifying the prevalence of stroke risk factors in specific regions (urban or rural) can lead to more effective allocation of healthcare resources, including specialized stroke centers, rehabilitation services, and preventative care.
+2. Targeted Treatment
 
-3. Targeted Preventative Programs: This dataset can help to identify the most common risk factors associated with stroke. For instance, if smoking or high glucose levels are identified as major contributors to stroke risk, tailored public health campaigns can focus on educating individuals about the dangers of smoking and the importance of controlling blood sugar levels.
+Identifying which factors predict stroke aides healthcare professional with developing treatments and intervetions for strokes.
 
-## Goals
- To identify key features that influence stroke risk and develop an accurate predictive model for better healthcare outcomes
+Risks & Unknowns
 
-## Techniques
-Before preceedings to the training the model, we understand the data and perform the preprocessing. During the pre-processing, we update the missing numeric values with its mean, categorize the non-numeric values, and standardize the numeric ones.
+Risk: It may not be possible to predict strokes
 
+Risk: It may not be possible to prevent a stroke even if you can predict it
 
-### Models
+Unknown: The cost of a potential stroke prevention treatment
 
-## Key Findings
+Unknown: The reliability of the raw data
+
+Unknown: The chronological order of the data (hypertension -> stroke vs stroke -> hypertension)
+
+## Goals & Objectivs
+The project aims to develop an reliable model to predict strokes and identify key features that predict strokes.
+
+Accuracy >= 80%
+Precision >= 70%
+Recall >= 70%
+F1 >= 70%
+
+Change: Due to class imbalance we were unable to achieve a high F1 score, so we are pivoting to optimize for recall instead of F1.
+
+Recall >= 90%
+
+## Techniques & Technologies
+### Preprocessing Tools
+- Imputation
+- Standard Scaling
+- Outliers (gender = other, work = child)
+- One-Hot-Encoding
+
+### Models & Methods
+- train test split
+- logistic regression (grid seach class_weights)
+- decision tress (grid seach class_weights)
+- xgboost (grid search scale pos weight)
+
+- accuracy, precision, recall, F1
+- F1 vs Recall
+- ROC AUC
+- class weight vs scale pos weight
+- feature importance
+- SHAP
+- grid__search for hyperparameter tuning
+- cross validation
+- EDA, plots, descriptive statistics
+
+## Key Findings & Instructions
+No setup instructions
+
+EDA
+
+F1 -> early attempts
+-> subsetting the data
+
+Rationale for the usefulness of high recall, the holistic cost of treatment (false positives) is significantly less than the holistic cost of (false negatives). The overall cost of treatments is feasible.
+
+Recall (final model) -> comparison across models, hyperparameters
+-> metrics, ROC AUC, cross validation
+-> real world implications
+-> SHAP, feature importance
+
+compare the metrics of each model F1 vs Recall, in a table, create an excel
+
+key factors, for each variable in our model do we agree or disagree with the SHAP and feature importance, use reasoning and EDA, what is our final answer to "which variable predict strokes"?
+
+Limitations (move from intro?)
 
 ## Visuals
+EDA visuals, upload PNG files to repo
 
 ### Exploratory data anlysis
-
-
 
   #### Class distribution of stroke
 
@@ -75,7 +128,7 @@ Before preceedings to the training the model, we understand the data and perform
 
 ![alt text](images/ht.png)
 
-## Contacts
+## Credits
 
 * Rui Qian Sun
 * Catherine Liang
