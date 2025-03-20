@@ -44,8 +44,16 @@ Change: Due to class imbalance we were unable to achieve a high F1 score, so we 
 ## Techniques & Technologies
 
 reproducability -> libraries, verisions, programming language, tools, softwares
+- pandas
+- from sklearn.model_selection import train_test_split
+- from sklearn.model_selection import GridSearchCV
+- from xgboost import XGBClassifier
+- from xgboost import XGBClassifier
+- from sklearn.model_selection import cross_val_score, cross_val_predict
+- from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
-Preprocessing
+
+Preprocessing (explain rationale)
 - Imputation
 - Standard Scaling
 - Outliers (gender = other, work = child)
