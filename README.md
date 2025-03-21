@@ -97,6 +97,50 @@ Based on SHAP summaries of the tuned and untuned logistic regression models, the
 The distribution of age by stroke status shows that prevalence increases with age.
 ![alt text](../Desktop/DSI/team_project/images/age-distribution.png)
 
+### Exploratory data analysis
+#### Class distribution of stroke
+
+  This bar plot shows the distribution of the target variable 'Stroke' across the dataset. As observed, the class distribution is highly imbalanced, where out of 5110 individuals, 4861 (95.13%) are non-stroke and 249 (4.87%) are susceptible to stroke.
+
+![alt text](images/distribution.png)
+
+#### Plots of categorical features by stroke status:
+
+![alt text](images/categorical_col.png)
+
+* Comparing stroke rates between genders: 
+
+    It is observed that the risk of stroke in both males and females are almost same - 4.71% fpr females and 5.11% for males. This observation matches the feature importance and SHAP outcomes that gender is not a significant predictor for strokes.
+
+* Stroke likelihood based on marital status:
+
+    From the plots it is observed that among the married individuals 6.56% and among unmarried ones 1.65% had a stroke. This shows that, in the dataset, the proportion of individuals who had a stroke is higher among married individuals than unmarried individuals.
+    
+    Considering all patients who had stroke, 88.35% of them are married and 11.84% are unmarried, as demonstrated in the pie chart. This indicates a correlation between marital status and stroke probability, with stroke rate being significantly higher among married individuals compared to unmarried ones. The feature importance of marital status is 0, which indicates that while this may be statistically significant, it is not a strong predictor for strokes.
+
+    ![alt text](images/em.png)
+
+* Proportion of stroke by residence type:
+
+  From the plots it is observed that 54.22% of the individuals who had a stroke are from urban areas and 45.78% from rural areas. The urban population has a slightly higher proportion of stroke cases compared to the rural population, but the difference is not very large. This might indicate that other factors (such as age, preexisting health conditions, etc.) could be contributing to stroke cases in urban areas. The results align with feature importance scores for residence type.
+
+* Proportion of stroke by work type:
+
+  The distribution of stroke cases based on work type shows that among the patients who suffered a stroke, 59.84% work private, 26.10% are self-employed, 13.25% are government job holders and the other categories 'children' and 'never worked' are negligible. It is observed that the 'private' sector has the largest proportion of stroke cases, 'self-employed' group also makes up a substantial portion, while 'Govt_job' has a smaller contribution. However, the feature importance and SHAP values show that the self-employed category is a stronger predictor of strokes compared to the other work categories.
+
+  ![alt text](images/worktype.png)
+
+* Stroke probability based on smoking status:
+
+  From the smoking status distribution it is observed that among the patients who suffered a stroke, 36.14%  never smoked, 28.11% formerly smoked, 18.88% have unknown smoking status and 16.87% currently smokes. The largest proportion of stroke cases come from people who have never smoked, which might be surprising but the combined proportion of stroke patients who previously smoked or currently smokes is quite significant. The feature importance of smoking status is negligible which shows that this is not a good predictor of strokes.
+
+From the exploratory data analysis of all the categorical features and comparing them to the feature importance scores and SHAP values, it is observed  that the self-employed work type is the only significant predictor of stroke while marital status has significant statistical significance.
+
+
+  ![alt text](images/smoke.png)
+
+
+
 
 Risks, Unknowns, & Limitations
 
@@ -115,15 +159,6 @@ Unknown: The dataset is cross-sectional. We only chose stroke as the outcome bec
 Risk: Depending on the prevention effort on individuals who are incorrectly predicted to have a stroke according to our model, the risk of implementing our modelling results would be the balance between harm and benefit in the prevention. For example, if the prevention strategy had negative side effects, or could be dangerous and invasive, the model results should not be used because of its low precision (which was the cost of high recall). Since our business case is focused on insights for public health decision makers, the prevention strategy is likely to be one implemented at the upstream level such as patient education efforts (e.g. smoking cessation, diet and exercise), increasing primary care, and managing other health conditions.
 
 ## Visuals
-EDA visuals, upload PNG files to repo
-
-### Exploratory data anlysis
-
-  #### Class distribution of stroke
-
-  This bar plot shows the distribution of the target variable Stroke across the dataset. As observed, the class distribution is imbalanced, with a larger proportion of individuals who did not have a stroke compared to those who had one.
-
-![alt text](images/distribution.png)
 
 * Histograms of Age and Average Glucose Level and BMI 
 ![alt text](images/hist.png)
