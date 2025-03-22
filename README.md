@@ -203,7 +203,7 @@ Hypertension
 ![alt text](images/categorical_col.png)
 
 ## Credits and links to personal videos
-* Rui Qian Sun
+* [Rui Qian Sun](https://drive.google.com/file/d/1MoJs6cyk0mN9n4DkvcrG86FDFUr61uZS/view?usp=sharing)
 * Catherine Liang
 * Mahbub Khandoker
 * Neethila Poddar
