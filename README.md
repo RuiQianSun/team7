@@ -5,11 +5,16 @@
 * [Purpose & Overview](#purpose--overview)
 * [Goals & Objectives](#goals--objectives)
 * [Techniques & Technologies](#techniques--technologies)
-* [Key Findings & Instructions](#keyfindings--instructions)
-* [Visuals & Credits](#visuals--contacts)
+* [Key Findings & Instructions](#key-findings--instructions)
+* [Visuals & Credits](#visuals--credits)
 
 ## Purpose & Overview
-This project focuses on determing which variables significantly predict the occurence of stroke. Our dataset consists of 11 variables for 5,110 patients, including the variable "stroke" which is 1 if a patient had a stroke or 0 otherwise. The remaining variables represent a patient's demographic, health, and lifestyle information.
+This project focuses on determing which variables significantly predict the occurence of stroke.
+
+**Business Problem:**
+We are a data science team working on stroke prevention. Our job is to advise public health decision makers on which factors significantly predict the occurence of stroke and use that to inform the population at risk who should receive stroke prevention treatment.
+
+Our dataset consists of 11 variables for 5,110 patients, including the variable "stroke" which is 1 if a patient had a stroke or 0 otherwise. The remaining variables represent a patient's demographic, health, and lifestyle information.
 
 * Age: age of patient
 * Gender: gender of patient
@@ -22,162 +27,184 @@ This project focuses on determing which variables significantly predict the occu
 * BMI: the body mass index of the patient
 * Smoking Status: the patient's smoking history/status
 
-Business Problem:
-We are a data science team working on stroke prevention. Our job is to advise public health decision makers on which factors significantly predict the occurence of stroke and use that to inform the population at risk who should receive stroke prevention treatment.
+### Exploratory data analysis
+#### Class distribution of stroke
 
-Industry Context:
+  This bar plot shows the distribution of the target variable 'Stroke' across the dataset. As observed, the class distribution is highly imbalanced, where out of 5110 individuals, 4861 (95.13%) are labeled non-stroke and 249 (4.87%) are labeled stroke.
+
+![alt text](images/distribution.png)
+
+* Comparing stroke rates between gender: 
+
+    It is observed that the occurence of stroke in both males and females are almost same - 4.71% for females and 5.11% for males.
+
+* Stroke based on marital status:
+
+    From the data, occurrence among married individuals is 6.56% and among unmarried individuals is 1.65%.
+    
+    Considering all patients who had stroke, 88.35% of them are married and 11.84% are unmarried, as demonstrated in the pie chart. This indicates a potential correlation between marital status and stroke.
+
+    ![alt text](images/em.png)
+
+* Proportion of stroke by residence type:
+
+  From the data, 54.22% of the individuals who had a stroke are from urban areas and 45.78% are from rural areas.
+
+* Proportion of stroke by work type:
+
+  The distribution of stroke cases based on work type shows that among the patients who suffered a stroke, 59.84% work private, 26.10% are self-employed, 13.25% are government job holders and very small percentages in the other categories 'children' and 'never worked'.
+
+  ![alt text](images/worktype.png)
+
+* Stroke by smoking status:
+
+  From the smoking status distribution it is observed that among the patients who suffered a stroke, 36.14% never smoked, 28.11% formerly smoked, 16.87% currently smokes, and 18.88% have unknown smoking status.
+
+  ![alt text](images/smoke.png)
+
+**Industry Context:**
 In 2021, stroke was one of the top 5 leading causes of death in Canada, responsible for 37 deaths per 100,000 people. Being able to identify predictors of stroke plays a critical role in stroke prevention for the healthcare industry.
 
 1. Early Detection: 
 The ability to predict a stroke before it happens leads to more opportunities to prevent the stroke through lifestyle changes and prevention treatments.
       
 2. Targeted Treatment:
-Identifying which factors predict stroke aides healthcare professional with developing treatments and intervetions for strokes.
+Identifying which factors predict stroke aides healthcare professionals with developing treatments and interventions for strokes.
 
 ## Goals & Objectives
-The project aims to develop a reliable model to predict stroke and identify associated key features. Our goal is to create a model with high accuracy, precision, recall, and F1 scores.
+The project aims to develop a reliable model to predict stroke and identify associated key features. Our goal is to create a model with high performance metrics.
 
-Change: Due to class imbalance in the dataset, we were unable to achieve a high F1 score, so we pivoted our modelling approach to optimize for recall instead of F1. The rationale for a high recall model is that false positives (predicting a stroke for a non-stroke patient) are less harmful than false negatives (predicting no stroke for a patient that suffers a stroke).
+Initially we aimed to optimize for F1, because it is a balanced metric of precision and recall, but due to class imbalance in the dataset we were unable to achieve a high F1 score (max 30%), so we pivoted our modelling approach to optimize for recall instead of F1. The rationale for a high recall model is that false positives (predicting a stroke for a non-stroke patient) are less harmful than false negatives (predicting no stroke for a patient that suffers a stroke).
+
+| Metrics for predicting stroke = 1 (Optimized for F1) | Logistic Regression | XGBoost Model |
+|----------|----------|----------|
+| Accuracy | 0.85 | 0.84 |
+| Precision | 0.20 | 0.19 |
+| F1 Score | 0.32 | 0.30 |
+| Recall | 0.74 | 0.70 |
+| ROC AUC | 0.84 | 0.85 |
 
 ## Techniques & Technologies
-The data used for this project was the Stroke Prediction Dataset from https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset?resource=download
+The data used for this project was the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset?resource=download).
 
 Analyses were performed using Python 3.9.15 in Jupyter notebooks.
 
-The libraries used in this project were pandas, numpy, scikit-learn, shap, statsmodels, matplotlib, and random. Seeds and random states can be found in the notebooks in the model folder. <mark>[TEAM PLEASE ADD LIBRARIES THAT I MIGHT HAVE MISSED] </mark>
+The libraries used in this project were pandas, numpy, scikit-learn, shap, statsmodels, matplotlib, xgboost, seaborn, plotly, and random. Seeds and random states can be found in the notebooks in the model folder.
 
 Preprocessing
-- Imputation: Simple imputation (using the mean) was performed on BMI, since only a small proportion of values (4%) were missing from the dataset. About 30% of the smoking status variable was labeled was "Unknown". We experimented with random imputation but decided to leave smoking status as is because imputing such a large proportion of data would lead to bias and might not represent the true data distribution. Thus, the interpretation of smoking status is a limitation of this analysis.
-- Outliers: There was 1 observation with Other gender, which was grouped with Male gender to reduce noise. Observations with "children" as the work type was grouped with the "never worked" category.
-- Standard Scaling was done on the numerical variables age, bmi, and average glucose level
+- Imputation: Simple imputation (using the mean) was performed on BMI, since only a small proportion of values (4%) were missing from the dataset.
+- About 30% of the smoking status variable was labeled was "Unknown". We experimented with random imputation but decided to leave smoking status as is because imputing such a large proportion of data would lead to bias and might not represent the true data distribution. Thus, the interpretation of smoking status is a limitation of this analysis.
+- There was 1 observation with "Other" gender, which was grouped with Male gender to reduce noise.
+- Observations with "children" as the work type was grouped with the "never worked" category.
+- Standard Scaling was done in the logistic regression model for the numerical variables age, bmi, and average glucose level
 - Categorical variables were one-hot encoded.
 
 Techniques & Metrics
 - The dataset was split using train_test_split from sklearn.model_selection.
 - Grid search was used for hyperparameter tuning of the models.
 - Performance metrics include accuracy, precision, recall, F1, and ROC AUC (Receiver Operating Characteristic - Area Under the Curve). 
-- <mark>cross validation</mark>
 - The features of the models were examined with feature importance and SHAP value plots.
 
 Models
-- Since this is a classification problem, the processed data was first fit into a logistic regression model with balanced class weights to adjust for data imbalance. VIF values were checked and no collinearity was detected. All of the non-outcome variables were fit into the model. The model accuracy was 0.7456, F1 score was 0.2353, recall: 0.80, precision was 0.1379, and ROC AUC was 0.8436. Tuning of hyperparameters was also done using sklearn's GridSearchCV to optimize for recall, metrics from the best model are shown in the table below.
-
-- decision tress (grid seach class_weights)
-- xgboost (class weight vs scale pos weight)?
-
+- Since this is a classification problem, the processed data was first fit into a logistic regression model with balanced class weights to adjust for class imbalance. VIF values were checked and no multi-collinearity was detected. All of the non-outcome variables were fit into the model. Tuning of hyperparameters was also done using sklearn's GridSearchCV to optimize for recall, metrics from the best model are shown in Key Findings.
+- Since we have significantly more non-stroke observations than stroke observations in our data, we also implemented XGBoost (Extreme Gradient Boosting) to address the class imbalance. XGBoost allows us to adjust the weight of the minority class to compensate for the imbalance, pushing the model to focus on predicting strokes.
 
 ## Key Findings & Instructions
-No setup instructions are required.
+Setup instructions include loading the libraries in Python and performing the preprocessing steps (see preprocessing.ipynb in data/processed).
 
-F1 attempts, accuracy, precision, recall, and f1 for stroke 1 and 0 results
--> subsetting the data
+If we optimize for recall in an XGBoost, for our 1022 test observations:
 
-compare the metrics of each model F1 vs Recall, in a table, create an excel
-Metrics (f1 vs recall side be side)
-- accuracy, precision, recall, F1
-- cross validation
-- ROC AUC
-- feature importance
-- SHAP
-- explanation in real world terms
+972 patients did not have a stroke
+  - 407 patients who did not have a stroke were correctly classified as NOT having a stroke
+  - 565 patients who did not have a stroke were INCORRECTLY classified as having a stroke
 
-| Metric | Logistic Regression | XGBoost Model |
+50 patients did have a stroke
+  - 48 patients who had a stroke were correctly classified as having a stroke
+  - 2 patients who had a stroke were INCORRECTLY classified as NOT having a stroke
+
+Since stroke is a serious adverse health event, our model may add value in that it is much worse to be incorrectly classified as not having a stroke when in fact there is a stroke (false negative), than misclassified as stroke when in fact there is no stroke.
+
+| Metric (Optimized for Recall) | Logistic Regression | XGBoost Model |
 |----------|----------|----------|
-| Accuracy | 0.6624 | Row 1, Column 3 |
-| Precision | precision 0.1108 | Row 2, Column 3 |
-| F1 Score | 0.1958 | Row 3, Column 3 |
-| Recall | 0.84 | Row 3, Column 3 |
-| ROC AUC | 0.8336 | Row 3, Column 3 |
+| Accuracy | 0.6624 | 0.4452 |
+| Precision | 0.1108 | 0.0783 |
+| F1 Score | 0.1958 | 0.1448 |
+| Recall | 0.84 | 0.96 |
+| ROC AUC | 0.8336 | 0.8389 |
 
-key factors, for each variable in our model do we agree or disagree with the SHAP and feature importance, use reasoning and EDA, what is our final answer to "which variable predict strokes"?
+Based on SHAP summaries of the tuned and untuned logistic regression models, the most important features were age, glucose level, work type, hypertension,BMI, and smoking status.
 
-Based on SHAP summaries of the tuned and untuned logistic regression models, the most important features were age, glucose level, work type, hypertension, and smoking status.
-<mark>[RUI ADD IMPORTANT FACTORS FROM XGBOOST] </mark>
+**SHAP Bee Swarm for Logistic Regression (recall)**
 
-The distribution of age by stroke status shows that prevalence increases with age.
-![alt text](../Desktop/DSI/team_project/images/age-distribution.png)
+![alt text](images/shap_logreg_tuned.png)
 
-### Exploratory data analysis
-#### Class distribution of stroke
+Based on SHAP summaries of the XGBoost model, the most important features were age, BMI, work type = self-employed, hypertension, glucose level.
 
-  This bar plot shows the distribution of the target variable 'Stroke' across the dataset. As observed, the class distribution is highly imbalanced, where out of 5110 individuals, 4861 (95.13%) are non-stroke and 249 (4.87%) are susceptible to stroke.
+**SHAP Bee Swarm for XGBoost (recall)**
 
-![alt text](images/distribution.png)
+![alt text](images/xgboost-recall-SHAP.png)
 
-#### Plots of categorical features by stroke status:
+In conclusion, our recommendation for which factors significantly predict the occurence of stroke is mainly "Age". "BMI" and "average glucose level" are also noteworthy.
 
-![alt text](images/categorical_col.png)
+![alt text](images/age_box_whiskers.png)
 
-* Comparing stroke rates between genders: 
+One actionable insight would be to recommend screening for stroke risk at certain age thresholds.
 
-    It is observed that the risk of stroke in both males and females are almost same - 4.71% fpr females and 5.11% for males. This observation matches the feature importance and SHAP outcomes that gender is not a significant predictor for strokes.
+![alt text](images/glucose.png)
 
-* Stroke likelihood based on marital status:
+Stroke cases tend to have higher glucose levels compared to non-stroke cases.
+There is a second peak around 200–250 mg/dL, suggesting hyperglycemia (high blood sugar) is more common in stroke patients. The distribution is more spread out, indicating greater variability in glucose levels among stroke patients.
 
-    From the plots it is observed that among the married individuals 6.56% and among unmarried ones 1.65% had a stroke. This shows that, in the dataset, the proportion of individuals who had a stroke is higher among married individuals than unmarried individuals.
-    
-    Considering all patients who had stroke, 88.35% of them are married and 11.84% are unmarried, as demonstrated in the pie chart. This indicates a correlation between marital status and stroke probability, with stroke rate being significantly higher among married individuals compared to unmarried ones. The feature importance of marital status is 0, which indicates that while this may be statistically significant, it is not a strong predictor for strokes.
+![alt text](images/BMI.png)
 
-    ![alt text](images/em.png)
+Both distributions peak around 25–30 BMI, which is in the overweight range. But the overall shapes of the curves are quite similar.
 
-* Proportion of stroke by residence type:
-
-  From the plots it is observed that 54.22% of the individuals who had a stroke are from urban areas and 45.78% from rural areas. The urban population has a slightly higher proportion of stroke cases compared to the rural population, but the difference is not very large. This might indicate that other factors (such as age, preexisting health conditions, etc.) could be contributing to stroke cases in urban areas. The results align with feature importance scores for residence type.
-
-* Proportion of stroke by work type:
-
-  The distribution of stroke cases based on work type shows that among the patients who suffered a stroke, 59.84% work private, 26.10% are self-employed, 13.25% are government job holders and the other categories 'children' and 'never worked' are negligible. It is observed that the 'private' sector has the largest proportion of stroke cases, 'self-employed' group also makes up a substantial portion, while 'Govt_job' has a smaller contribution. However, the feature importance and SHAP values show that the self-employed category is a stronger predictor of strokes compared to the other work categories.
-
-  ![alt text](images/worktype.png)
-
-* Stroke probability based on smoking status:
-
-  From the smoking status distribution it is observed that among the patients who suffered a stroke, 36.14%  never smoked, 28.11% formerly smoked, 18.88% have unknown smoking status and 16.87% currently smokes. The largest proportion of stroke cases come from people who have never smoked, which might be surprising but the combined proportion of stroke patients who previously smoked or currently smokes is quite significant. The feature importance of smoking status is negligible which shows that this is not a good predictor of strokes.
-
-From the exploratory data analysis of all the categorical features and comparing them to the feature importance scores and SHAP values, it is observed  that the self-employed work type is the only significant predictor of stroke while marital status has significant statistical significance.
-
-
-  ![alt text](images/smoke.png)
-
-
-
-
-Risks, Unknowns, & Limitations
+**Risks, Unknowns, & Limitations**
 
 Limitation: Due to the rare outcome of stroke in this dataset, it was challenging to optimize on several performance metrics. Our final models showed good recall and AUC scores (over 0.8 in the logistic regression model and over 0.9 in the XGBoost model). Due to the various health conditions among individuals for a stroke to occure, it might not be possible to predict the timing of a stroke. However, we were able to find several key factors that would put one at the risk of a stroke, with age being the most important. 
 
-Limitation: It may not be possible to prevent a stroke even if you can predict it
+Unknown: The source of the dataset is unknown, and might not be representative of the distribution in the population. Although, the 4% stroke outcome seen in this dataset is similar to the 3% prevalence in Canadian adults, according to the [Public Health Agency of Canada](https://health-infobase.canada.ca/ccdss/data-tool/). 
 
-Unknown: The financial cost of a potential stroke prevention treatment
-
-Unknown: The source of the dataset is unknown, and might not be representative of the distribution in the population. Although, the 4% stroke outcome seen in this dataset is similar to the 3% prevalence in Canadian adults, according to the Public Health Agency of Canada (hyperlink https://health-infobase.canada.ca/ccdss/data-tool/). 
-
-Unknown: The dataset lacks information on other health conditions and lifestyle facotrs which have been found to be highly associated with strokes, including prior stroke history, transcient ischemic attack history, blood cholesterol, alcohol consumption, etc. (hyperlink source: https://www.hopkinsmedicine.org/health/conditions-and-diseases/stroke)
+Unknown: The dataset lacks information on other health conditions and lifestyle factors which have been found to be highly associated with strokes, including prior stroke history, transient ischemic attack history, blood cholesterol, alcohol consumption, etc. [(source)](https://www.hopkinsmedicine.org/health/conditions-and-diseases/stroke)
 
 Unknown: The dataset is cross-sectional. We only chose stroke as the outcome because that's our business problem. However, the outcome could be other variables such as hypertension and heart disease. Thus we cannot determine causal relationship between stroke and the other variables, only associations.
 
 Risk: Depending on the prevention effort on individuals who are incorrectly predicted to have a stroke according to our model, the risk of implementing our modelling results would be the balance between harm and benefit in the prevention. For example, if the prevention strategy had negative side effects, or could be dangerous and invasive, the model results should not be used because of its low precision (which was the cost of high recall). Since our business case is focused on insights for public health decision makers, the prevention strategy is likely to be one implemented at the upstream level such as patient education efforts (e.g. smoking cessation, diet and exercise), increasing primary care, and managing other health conditions.
 
-## Visuals
+Limitation: As mentioned above, we experimented with imputing the "Unknown" smoking status category, but imputing such a large proportion of data would lead to bias and might not represent the true data distribution. Smoking is a critical predictor of stroke, so unknown smoking status is a limitation in this dataset.
 
-* Histograms of Age and Average Glucose Level and BMI 
-![alt text](images/hist.png)
+**Next Steps**
 
-* Scatterplots of Age vs Average Glucose Level and BMI 
+If our team had more time we would like to continue working on a model with high performance metrics. This would involve gathering more data, researching advance methods to address class imbalance, and resolving the "unknown" smoking statuses.
+
+It could also be worthwhile experimenting modelling age as a non-linear relationship, or categorizing into age groups to find the one with the highest likelihood of stroke, which would help with a public health screening strategy.
+
+We would also further investigate the relationships between heart disease and stroke as well as hypertension and stroke. It was interesting that heart disease did not rank high in our SHAP values despite existing evidence of heart disease increasing the risk of stroke.
+
+## Visuals & Credits
+
+Age & Stroke
+
+![alt text](images/age-curves.png)
+
+Scatterplots of Age vs Average Glucose Level and Age vs BMI 
 
 ![alt text](images/scatterplots.png)
 
-* Pie charts of stroke probability for people with heart disease and hypertension
+Heart disease
 
 ![alt text](images/hd.png)
 
+Hypertension
+
 ![alt text](images/ht.png)
 
-## Credits and links to videos
+#### Plots of categorical features
+![alt text](images/categorical_col.png)
 
+## Credits and links to personal videos
 * Rui Qian Sun
 * Catherine Liang
 * Mahbub Khandoker
 * Neethila Poddar
 * Devangi Vyas
-
