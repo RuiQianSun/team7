@@ -205,6 +205,6 @@ Hypertension
 ## Credits and links to personal videos
 * [Rui Qian Sun](https://drive.google.com/file/d/1MoJs6cyk0mN9n4DkvcrG86FDFUr61uZS/view?usp=sharing)
 * Catherine Liang
-* Mahbub Khandoker
-* Neethila Poddar
+* [Mahbub Khandoker](https://drive.google.com/file/d/1MUOKuyR9tyO2AD_71izG7gaiRIc3NoQk/view?usp=drivesdk)
+* [Neethila Poddar](https://drive.google.com/file/d/1ojXnrVzG1xlFsG_niDt0VCXGzpTrTWXR/view?usp=sharing)
 * Devangi Vyas
